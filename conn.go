@@ -73,6 +73,7 @@ func (c *connection) writePump(h *hub) {
 		ticker.Stop()
 		c.ws.Close()
 	}()
+
 	//infinite loop, for as long as within connection times
 	for {
 		select {
@@ -102,9 +103,23 @@ func (h *hub) serveWs(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 		return
 	}
+
 	c := &connection{send: make(chan []byte, 256), ws: ws}
+	//register connection to hub
 	h.register <- c
-	//Place Read pump in goroutine for indefinite listening.  
+
+
+
+	if len(h.messages) > 0 {
+		// for _, m := range h.messages {
+			if err := c.write(websocket.TextMessage, h.messages, h); err != nil {
+				return
+			}
+		// }
+	}
+
+	//Place Read pump in goroutine for indefinite listening.
 	go c.readPump(h)
+	//write pump contains for select so is indefinitely listening.
 	c.writePump(h)
 }

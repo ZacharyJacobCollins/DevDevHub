@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 //hub is similar to a "channel" in slack.
 type hub struct {
 	// Registered broadcasts.
@@ -13,6 +17,8 @@ type hub struct {
 
 	// Unregister requests from connections.
 	unregister chan *connection
+
+	messages []byte
 }
 
 //it's only using the last hub even though we created 3.
@@ -28,6 +34,9 @@ func (h *hub) run() {
 			}
 		//if there is message in channel broadcast, send to c of all h.connections
 		case m := <-h.broadcast:
+			//for testing purposes, checking to make sure appending is correct
+			h.messages = append(m, h.messages...)
+			fmt.Println((h.messages))
 			for c := range h.connections {
 				select {
 				case c.send <- m:

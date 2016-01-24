@@ -54,6 +54,7 @@
       });
 
       //create a websocket
+      //Happens if browser has a WebSocket object, and thus WebSocket support
       if (window["WebSocket"]) {
           var loc = window.location, new_uri;
           if (loc.protocol === "https:") {
@@ -61,6 +62,7 @@
           } else {
               new_uri = "ws:";
           }
+          //Example ws or //wss //https://(template insertion)xxxxxxx/ws
           new_uri += "//{{$}}"+ "/ws" + loc.pathname;
           conn = new WebSocket(new_uri);
           conn.onclose = function(evt) {
@@ -73,6 +75,7 @@
           appendChat($("<div><b>A browser with websocket support is required.</b></div>"))
       }
       });
+
   </script>
   </head>
   <body>

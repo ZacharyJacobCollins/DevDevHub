@@ -20,6 +20,7 @@ func (c *controller) addHub() {
   	register:    make(chan *connection),
   	unregister:  make(chan *connection),
   	connections: make(map[*connection]bool),
+    messages:    make([]byte, 0),
   }
   contr.hubs = append(contr.hubs, &h)
 }
