@@ -109,7 +109,7 @@ func (h *hub) serveWs(w http.ResponseWriter, r *http.Request) {
 	h.register <- c
 
 
-
+	//if there are messages in message array, send messages to connection
 	if len(h.messages) > 0 {
 		// for _, m := range h.messages {
 			if err := c.write(websocket.TextMessage, h.messages, h); err != nil {
