@@ -34,7 +34,8 @@ func (h *hub) run() {
 			}
 		//if there is message in channel broadcast, send to c of all h.connections
 		case m := <-h.broadcast:
-			//for testing purposes, checking to make sure appending is correct
+			//for testing purposes, checking to make sure appending is correct sptting out ascii shit in term currently
+			
 			m = append(m, []byte("\n")...)
 			h.messages = append(h.messages, m...)
 
