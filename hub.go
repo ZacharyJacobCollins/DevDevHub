@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 //hub is similar to a "channel" in slack.
 type hub struct {
 	// Registered broadcasts.
@@ -35,11 +31,11 @@ func (h *hub) run() {
 		//if there is message in channel broadcast, send to c of all h.connections
 		case m := <-h.broadcast:
 			//for testing purposes, checking to make sure appending is correct sptting out ascii shit in term currently
-			
+
 			m = append(m, []byte("\n")...)
 			h.messages = append(h.messages, m...)
+			//TODO change from array
 
-			fmt.Println((h.messages))
 			for c := range h.connections {
 				select {
 				case c.send <- m:

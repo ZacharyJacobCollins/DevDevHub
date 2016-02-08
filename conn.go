@@ -61,7 +61,7 @@ func (c *connection) readPump(h *hub) {
 func (c *connection) write(mt int, payload []byte, h *hub) error {
 	c.ws.SetWriteDeadline(time.Now().Add(writeWait))
 
-	nickname := []byte(c.name+": ")
+	nickname := []byte(c.name+"")
 	payload = append(nickname, payload...)
 	return c.ws.WriteMessage(mt, payload)
 }

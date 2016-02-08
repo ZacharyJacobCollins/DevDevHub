@@ -8,8 +8,8 @@
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <meta name="description" content="Golang Chat Example">
       <meta name="author" content="Zachary Collins">
-      <link rel="icon" href="http://getbootstrap.com/favicon.ico">
-      <title>Chat Example</title>
+      <link rel="icon" href="https://netid.emich.edu/cas/favicon.ico" type="image/x-icon">
+      <title>ACM Chat</title>
       <!-- Bootstrap core CSS -->
       <link href="./assets/bootstrap.min.css" rel="stylesheet">
       <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
@@ -66,7 +66,7 @@
           new_uri += "//{{$}}"+ "/ws" + loc.pathname;
           conn = new WebSocket(new_uri);
           conn.onclose = function(evt) {
-              appendChat($("<div><b>You have been disconnected due to inactivity.</b></div>"))
+              appendChat($("<div><b>You have been connected due to inactivity.</b></div>"))
           }
           conn.onmessage = function(evt) {
               appendChat($("<div/>").text(evt.data))
@@ -84,27 +84,23 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <img src="https://goo.gl/GgLSrt" style="width:50px; height:50px" alt="prof picture"> </img>
                 <li class="sidebar-brand">
-                    <a href="#">
-                        Chat Example
-                    </a>
+                    <a href="#">ACM Chat</a>
                 </li>
                 <li>
-                    <a href="/0">Discussion 0</a>
+                    <a href="/0">ACM Meetings</a>
                 </li>
                 <li>
-                    <a href="/1">Discussion 1</a>
+                    <a href="/1">Random</a>
                 </li>
                 <li>
-                    <a href="/2">Discussion 2</a>
+                    <a href="/2">Project Progress and Help</a>
                 </li>
             </ul>
         </div>
         <!-- #Sidebar-wrapper -->
 
         <!--#page content wrapper here -->
-
     <div class="container" style="float:left; margin-top:15px;">
       <div id="chat" class="container"></div>
     </div>
